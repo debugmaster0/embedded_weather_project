@@ -1,0 +1,47 @@
+# -------------------------------------------------
+# Old / obsolete project
+# -------------------------------------------------
+EPaper_Test/
+
+# -------------------------------------------------
+# STM32 / CMake build output
+# -------------------------------------------------
+test_config/build/
+build/
+cmake-build-*/
+
+# Compiled firmware / object files
+*.o
+*.obj
+*.elf
+*.bin
+*.hex
+*.map
+*.lst
+*.d
+*.su
+
+# -------------------------------------------------
+# CMake generated files
+# -------------------------------------------------
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# -------------------------------------------------
+# macOS garbage
+# -------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# -------------------------------------------------
+# Editor / IDE junk
+# -------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
