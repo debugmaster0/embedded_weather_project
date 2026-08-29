@@ -57,14 +57,14 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define EP_CS_Pin GPIO_PIN_12
-#define EP_CS_GPIO_Port GPIOB
 #define EP_DC_Pin GPIO_PIN_8
 #define EP_DC_GPIO_Port GPIOA
 #define EP_RST_Pin GPIO_PIN_9
 #define EP_RST_GPIO_Port GPIOA
 #define EP_BUSY_Pin GPIO_PIN_10
 #define EP_BUSY_GPIO_Port GPIOA
+#define EP_CS_Pin GPIO_PIN_3
+#define EP_CS_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

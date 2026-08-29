@@ -38,10 +38,10 @@ static void EPD_SendData(uint8_t data)
 static void EPD_Reset(void)
 {
     HAL_GPIO_WritePin(EP_RST_GPIO_Port, EP_RST_Pin, GPIO_PIN_RESET);
-    HAL_Delay(10);
+    HAL_Delay(100);
 
     HAL_GPIO_WritePin(EP_RST_GPIO_Port, EP_RST_Pin, GPIO_PIN_SET);
-    HAL_Delay(10);
+    HAL_Delay(100);
 }
 
 static uint8_t EPD_WaitBusy(void)
@@ -49,7 +49,7 @@ static uint8_t EPD_WaitBusy(void)
     uint32_t start = HAL_GetTick();
 
     // Give SSD1680 time to assert BUSY
-    HAL_Delay(10);
+    HAL_Delay(100);
 
     while (HAL_GPIO_ReadPin(EP_BUSY_GPIO_Port, EP_BUSY_Pin) == GPIO_PIN_SET)
     {
@@ -58,7 +58,7 @@ static uint8_t EPD_WaitBusy(void)
             return 0;
         }
 
-        HAL_Delay(1);
+        HAL_Delay(300);
     }
 
     return 1;
@@ -101,7 +101,21 @@ uint8_t EPD_Init(void)
 
     // Border waveform
     EPD_SendCommand(0x3C);
-    EPD_SendData(0x05);
+    EPD_SendData(0x03);
+    
+    // VCOM
+    EPD_SendCommand(0x2C);
+    EPD_SendData(0x36);
+    
+    // Gate voltage
+    EPD_SendCommand(0x03);
+    EPD_SendData(0x17);
+    
+    // Source voltage
+    EPD_SendCommand(0x04);
+    EPD_SendData(0x41);
+    EPD_SendData(0xAE);
+    EPD_SendData(0x32);
 
     // Start RAM counters at 0,0
     EPD_SendCommand(0x4E);
@@ -157,15 +171,12 @@ uint8_t EPD_Clear(void)
 
     // Tell SSD1680 to perform the physical display update
     EPD_SendCommand(0x22);
-    EPD_SendData(0xF7);
+    EPD_SendData(0xF4);
 
     EPD_SendCommand(0x20);
 
-    if (!EPD_WaitBusy())
-    {
-        return 0;
-    }
-
+    HAL_Delay(5000);
+    
     return 1;
 }
 
